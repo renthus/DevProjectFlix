@@ -16,6 +16,9 @@ class Project(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_LIST)
     views = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
 # Create type projects
 
 # Create users

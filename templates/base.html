@@ -5,13 +5,18 @@
     <head>
 
         <meta charset="UTF-8">
-        <title>Renato Maldonado | Projects</title>
+        
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
 
     </head>
 
     <body>
 
-        <h1>Hello World!</h1>
+        {% block content %}
+        {% endblock %}
 
     </body>
 

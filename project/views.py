@@ -5,4 +5,4 @@ def homepage(request):
     return render(request, "homepage.html")
 
 def homeprojects(request):
-    return render(request, "homeprojects")
+    return render(request, "homeprojects.html")

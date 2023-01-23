@@ -1,8 +1,17 @@
 from django.shortcuts import render
+from .models import Project
+from django.views.generic import TemplateView 
 
 # Create your views here.
-def homepage(request):
-    return render(request, "homepage.html")
+
+# def homepage(request):
+#     return render(request, "homepage.html")
+
+class Homepage(TemplateView):
+    template_name = "homepage.html"
 
 def homeprojects(request):
-    return render(request, "homeprojects.html")
+    context = {}
+    project_list = Project.objects.all()
+    context['projects_list'] = project_list
+    return render(request, "homeprojects.html", context)

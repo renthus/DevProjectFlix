@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+HomeProjects - renthus
+{% endblock %}
+
+{% block content %}
+<h1>Essa é a nossa home projects!</h1>
+
+{% for project in projects_list %}
+    <hr>
+    <p>{{ project }}</p>
+    <p>{{ project.description }}</p>
+    <img src="{{ project.thumb.url }}">
+{% endfor %}
+
+{% endblock %}

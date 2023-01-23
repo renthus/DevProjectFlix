@@ -124,6 +124,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_URL = 'thumb_projects/'
+
+MEDIA_ROOT = BASE_DIR / "thumb_projects"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

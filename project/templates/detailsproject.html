@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+HomeProjects - renthus
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Esse é o detalhe do nosso filme: {{ object.title }}</h1>
+<p>{{ object }}</p>
+<p>{{ object.description }}</p>
+<img src="{{ object.thumb.url }}">
+
+{% endblock %}

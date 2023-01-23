@@ -7,7 +7,7 @@ HomeProjects - renthus
 {% block content %}
 <h1>Essa é a nossa home projects!</h1>
 
-{% for project in projects_list %}
+{% for project in object_list %}
     <hr>
     <p>{{ project }}</p>
     <p>{{ project.description }}</p>

@@ -11,7 +11,7 @@ class Homeprojects(ListView):
     template_name = "homeprojects.html"
     model = Project
 
-class DetailsProject(DetailView):
+class Detailsproject(DetailView):
     template_name = "detailsproject.html" 
     model = Project
 

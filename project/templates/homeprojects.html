@@ -7,11 +7,13 @@ HomeProjects - renthus
 {% block content %}
 <h1>Essa é a nossa home projects!</h1>
 
-{% for project in object_list %}
-    <hr>
-    <p>{{ project }}</p>
-    <p>{{ project.description }}</p>
-    <img src="{{ project.thumb.url }}">
-{% endfor %}
+    <div><br><br><br><br><br>        
+        {% for project in object_list %}
+        <hr>
+        <a href="{% url 'project:detailsproject' project.pk %}"><p>{{ project.title }}</p></a>
+        <p>{{ project.description }}</p>
+        <img src="{{ project.thumb.url }}">
+        {% endfor %}
+    </div>
 
 {% endblock %}

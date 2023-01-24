@@ -20,5 +20,12 @@ class Project(models.Model):
         return self.title
 
 # Create type projects
+class Topic(models.Model):
+    project = models.ForeignKey("Project", related_name="topic", on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    video = models.URLField()
+
+    def __str__(self):
+        return self.project.title + " - " + self.title
 
 # Create users

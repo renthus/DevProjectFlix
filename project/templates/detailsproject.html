@@ -12,4 +12,13 @@ HomeProjects - renthus
 <p>{{ object.description }}</p>
 <img src="{{ object.thumb.url }}">
 
+<h2>Topics</h2>
+{% for topic in object.topic.all %}
+<a href="{{ topic.video }}">
+    <p>
+        Topic {{ forloop.counter }}: {{ topic.title }}
+    </p>
+</a>
+{% endfor %}
+
 {% endblock %}

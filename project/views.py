@@ -15,6 +15,12 @@ class Detailsproject(DetailView):
     template_name = "detailsproject.html" 
     model = Project
 
+    def get_context_data(self, **kwargs):
+        context = super(Detailsproject, self).get_context_data(**kwargs)
+        projects_relations = Project.objects.filter(category=self.get_object().category)
+        context["projects_relations"] = projects_relations
+        return context
+
 # def homepage(request):
 #     return render(request, "homepage.html")
 

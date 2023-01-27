@@ -7,7 +7,7 @@ HomeProjects - renthus
 
 {% block content %}
 
-<h1>Esse é o detalhe do nosso filme: {{ object.title }}</h1>
+<h1>This is Project Details: {{ object.title }}</h1>
 <p>{{ object }}</p>
 <p>{{ object.description }}</p>
 <img src="{{ object.thumb.url }}">
@@ -20,5 +20,15 @@ HomeProjects - renthus
     </p>
 </a>
 {% endfor %}
+<div class="py-10">
+    <h2>Related Projects</h2>
+    {% for project in projects_relations %}
+        <p>
+            <a href="{% url 'project:detailsproject' project.pk %}">
+                {{ project.title }}
+            </a>
+        </p>
+    {% endfor %}
+</div>
 
 {% endblock %}

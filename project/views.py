@@ -15,6 +15,13 @@ class Detailsproject(DetailView):
     template_name = "detailsproject.html" 
     model = Project
 
+    def get(self, request, *args, **kwargs):
+        project = self.get_object()
+        project.views += 1
+        project.save()
+        return super(Detailsproject, self).get(request, *args, **kwargs)
+
+
     def get_context_data(self, **kwargs):
         context = super(Detailsproject, self).get_context_data(**kwargs)
         projects_relations = Project.objects.filter(category=self.get_object().category)

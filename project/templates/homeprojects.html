@@ -5,7 +5,8 @@ HomeProjects - renthus
 {% endblock %}
 
 {% block content %}
-<h1>Essa é a nossa home projects!</h1>
+<div class="py-10">
+    <h1>Essa é a nossa home projects!</h1>
 
     <div><br><br><br><br><br>        
         {% for project in object_list %}
@@ -15,5 +16,23 @@ HomeProjects - renthus
         <img src="{{ project.thumb.url }}">
         {% endfor %}
     </div>
+</div>
+
+<div class="py-10">
+    <h2>Recent Projects</h2>
+
+    <div>
+        {{ list_projects_recent }}
+    </div>
+</div>
+
+<div class="py-10">
+    <h2>Top Projects</h2>
+
+    <div>
+        {{ list_projects_top }}
+    </div>
+</div>
+
 
 {% endblock %}

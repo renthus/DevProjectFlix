@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -15,6 +16,7 @@ class Project(models.Model):
     description = models.TextField(max_length=2000)
     category = models.CharField(max_length=20, choices=CATEGORY_LIST)
     views = models.IntegerField(default=0)
+    date_create = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title

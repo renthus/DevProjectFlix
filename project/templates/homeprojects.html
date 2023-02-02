@@ -1,37 +1,194 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 HomeProjects - renthus
 {% endblock %}
 
+{% block head %}
+<style>
+$itemGrow: 1.2;
+$duration: 250ms;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+}
+
+h1 {
+  font-family: Arial;
+  color: red;
+  text-align: center;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3,100%);
+  overflow:hidden;
+  scroll-behavior: smooth;
+
+  section {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    margin: 20px 0;
+    
+    .item {
+      padding: 0 2px;
+      transition: $duration all;
+      
+      &:hover { 
+        margin: 0 40px;
+        transform: scale(1.2);
+      }
+      
+    }
+    
+    a {
+      position: absolute;
+      color: #fff;
+      text-decoration: none;
+      font-size: 6em;
+      background:rgb(0,0,0);
+      width: 80px;
+      padding: 20px;
+      text-align: center;
+      z-index: 1;
+      
+      &:nth-of-type(1) {
+        top:0; bottom:0; left:0;
+        background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
+      &:nth-of-type(2) {
+        top:0; bottom:0; right: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
+      
+    }
+    
+  }
+}
+
+// Remove the arrow for Mobile
+@media only screen and (max-width: 600px) {
+  a.arrow__btn {
+    display:none;
+  }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="py-10">
+<main class='bg-primary_black min-h-screen w-full'>
+    <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex items-end bg-cover" style="background-image: url('{% static "images/devprojectflix.png" %}');">
+        <div>
+        <h2 class="text-6xl font-semibold text-white my-4"></h2>
+        <p class=" w-11/12 md:w-5/12 font-medium text-white my-4"></p>
+            <div class="flex my-4">
+                <a href="#">
+                    <button class="flex items-center bg-white py-2 px-5 rounded-md" style='color:black;'>
+                        <ion-icon name="play" class="text-2xl"></ion-icon>
+                        <span class="ml-3 font-medium " >
+                            Play
+                        </span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section> 
 
-    <div><br><br><br><br><br>        
-        {% for project in object_list %}
-        <hr>
-        <a href="{% url 'project:detailsproject' project.pk %}"><p>{{ project.title }}</p></a>
-        <p>{{ project.description }}</p>
-        <img src="{{ project.thumb.url }}">
-        {% endfor %}
-    </div>
-</div>
+    <section class='bg-primary_black flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative" >
+        <h2 class="text-gray-200 text-2xl font-medium">
+            Recents
+        </h2>
+            <div class="wrapper">
+                <section id="section1" class="flex flex-nowrap items-center justify-center space-x-8">
+                    <a href="#section2" class="arrow__btn text-6xl page">‹</a>
 
-<div class="py-10">
-    <h2>Recent Projects</h2>
+                        {% for project in list_projects_recent %}
+                        {% if forloop.counter < 5 %}
+                        <div class="item h-64 w-1/4 m-4">
+                            <a href="{% url 'project:detailsproject' project.pk %}">
+                                <img src="{{ project.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    
+                        <a href="#section2" class="arrow__btn text-6xl">›</a>
+                </section>
+                
+                {% if list_projects_recent|length > 4 %}
+                <section id="section2" class="flex flex-nowrap items-center justify-center">
+                    <a href="#section1" class="arrow__btn text-6xl">‹</a>
+                        
+                        {% for project in list_projects_recent %}
+                        {% if forloop.counter > 4 %}
+                        <div class="item h-64 w-1/4 m-4">
+                            <a href="#">
+                                <img src="#" class="rounded-md w-full h-full object-cover">
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        
+                    <a href="#section1" class="arrow__btn text-6xl">›</a>
+                </section>
+                {% endif %}
 
-    <div>
-        {{ list_projects_recent }}
-    </div>
-</div>
+            </div>
+        </div>
+    </section>
 
-<div class="py-10">
-    <h2>Top Projects</h2>
+    <section class='bg-primary_black flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative" >
+        <h2 class="text-gray-200 text-2xl font-medium">
+            Top
+        </h2>
+            <div class="wrapper">
+                <section id="sectiontop1" class="flex flex-nowrap items-center justify-center space-x-8">
+                    <a href="#sectiontop2" class="arrow__btn text-6xl page">‹</a>
 
-    <div>
-        {{ list_projects_top }}
-    </div>
-</div>
+                        {% for project in list_projects_top %}
+                        {% if forloop.counter < 5 %}
+                        <div class="item h-64 w-1/4 m-4">
+                            <a href="{% url 'project:detailsproject' project.pk %}">
+                                <img src="{{ project.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    
+                        <a href="#sectiontop2" class="arrow__btn text-6xl">›</a>
+                </section>
+                
+                {% if list_projects_top|length > 4 %}
+                <section id="sectiontop2" class="flex flex-nowrap items-center justify-center">
+                    <a href="#sectiontop1" class="arrow__btn text-6xl">‹</a>
+                        
+                        {% for project in list_projects_top %}
+                        {% if forloop.counter > 4 %}
+                        <div class="item h-64 w-1/4 m-4">
+                            <a href="#">
+                                <img src="#" class="rounded-md w-full h-full object-cover">
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        
+                    <a href="#sectiontop1" class="arrow__btn text-6xl">›</a>
+                </section>
+                {% endif %}
 
+            </div>
+        </div>
+    </section>
 
+</main>
 {% endblock %}
